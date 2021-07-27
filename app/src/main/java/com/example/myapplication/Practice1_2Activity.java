@@ -16,6 +16,12 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import com.example.myapplication.practice.RequestWithOkhttp;
 
 import java.io.IOException;
+import java.lang.reflect.Type;
+import java.util.List;
+
+import com.example.myapplication.practice.ItemInfo;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 public class Practice1_2Activity extends AppCompatActivity {
 
@@ -48,7 +54,7 @@ public class Practice1_2Activity extends AppCompatActivity {
                     Log.d("测试2","成功");
                     String responseData = response.body().string();
                     Log.d("测试3",responseData);
-
+                    parseJSONWithGSON(responseData);//解析json
                     //自定义函数用于显示数据
                 } catch (IOException e) {
                     System.out.println("出错了");
@@ -56,6 +62,16 @@ public class Practice1_2Activity extends AppCompatActivity {
                 }
             }
         }).start();
+    }
+
+    private void parseJSONWithGSON(String responseData) {
+        Gson gson = new Gson();
+        ItemInfo itemInfoList = gson.fromJson(responseData, ItemInfo.class);
+        Log.d("测试4","成功");
+
+        Log.d("name",itemInfoList.getProgramSeries().get(0).getName());
+
+
     }
 
 

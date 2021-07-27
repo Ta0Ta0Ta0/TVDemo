@@ -1,6 +1,14 @@
 package com.example.myapplication;
 
+import com.example.myapplication.practice.ItemInfo;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 import org.junit.Test;
+
+import java.io.File;
+import java.io.FileReader;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -13,6 +21,13 @@ public class ExampleUnitTest {
     @Test
     public void addition_isCorrect() {
         assertEquals(4, 2 + 2);
+    }
+    @Test
+    public void gson_test(){
+        Gson gson = new Gson();
+        String userJson = "{isDeveloper': false,'name': 'xiaoqiang','age': 26,'email': '578570174@qq.com','programSeries': [{'contentType': null,'psId': '1200914710'},{'contentType': 'vod','psId': '1200913315'}]}";
+        User user = gson.fromJson(userJson, User.class);
+        System.out.println(user.getProgramSeries().get(0).getContentType());
     }
 
 }
