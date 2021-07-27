@@ -9,10 +9,9 @@
 
     <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/my_image_view"
-        android:layout_width="130dp"
-        android:layout_height="130dp"
-        fresco:placeholderImage="@drawable/picture_example"
-        />
+        android:layout_width="366dp"
+        android:layout_height="712dp"
+        fresco:placeholderImage="@drawable/picture_example" />
 
 
 </LinearLayout>
