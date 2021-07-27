@@ -13,6 +13,8 @@ import android.widget.TextView;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.view.SimpleDraweeView;
 
+import com.example.myapplication.practice.RequestWithOkhttp;
+
 import java.io.IOException;
 
 public class Practice1_2Activity extends AppCompatActivity {
