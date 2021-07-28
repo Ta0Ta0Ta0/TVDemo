@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import java.io.File;
 import java.io.FileReader;
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -27,7 +28,8 @@ public class ExampleUnitTest {
         Gson gson = new Gson();
         String userJson = "{isDeveloper': false,'name': 'xiaoqiang','age': 26,'email': '578570174@qq.com','programSeries': [{'contentType': null,'psId': '1200914710'},{'contentType': 'vod','psId': '1200913315'}]}";
         User user = gson.fromJson(userJson, User.class);
-        System.out.println(user.getProgramSeries().get(0).getContentType());
+        List<User.ProgramSeriesDTO> a = user.getProgramSeries();
+        System.out.println(a.get(0).getPsId());
     }
 
 }
