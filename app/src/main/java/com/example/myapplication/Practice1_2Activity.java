@@ -66,10 +66,10 @@ public class Practice1_2Activity extends AppCompatActivity {
 
     private void parseJSONWithGSON(String responseData) {
         Gson gson = new Gson();
-        ItemInfo itemInfoList = gson.fromJson(responseData, ItemInfo.class);
+        ItemInfo itemInfo = gson.fromJson(responseData, ItemInfo.class);
         Log.d("测试4","成功");
 
-        Log.d("name",itemInfoList.getProgramSeries().get(0).getName());
+        Log.d("name",itemInfo.getProgramSeries().get(0).getName());
 
 
     }

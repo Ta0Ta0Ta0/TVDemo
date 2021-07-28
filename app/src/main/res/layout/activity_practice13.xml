@@ -7,8 +7,9 @@
     tools:context=".Practice1_3Activity">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:id="@+id/to_show"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         />
