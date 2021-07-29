@@ -71,11 +71,11 @@ public class Practice1_3Activity extends AppCompatActivity {
                 try {
                     OkHttpClient client = new OkHttpClient();
                     Request request = new Request.Builder().url(url_example).build();
-//                    Log.d("测试1","成功");
+                    Log.d("测试1","成功");
                     Response response = client.newCall(request).execute();
-//                    Log.d("测试2","成功");
+                    Log.d("测试2","成功");
                     String responseData = response.body().string();
-//                    Log.d("测试3",responseData);
+                    Log.d("测试3",responseData);
 
                     ItemInfo itemInfo = parseJSONWithGSON(responseData);//解析json
 

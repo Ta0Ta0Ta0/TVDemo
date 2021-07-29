@@ -15,7 +15,7 @@ import retrofit2.http.Url;
 public interface IHttpProgram {
 
     @GET
-    Call<ResponseBody> getProgram(@Url String str);
+    Call<ItemInfo> getProgram(@Url String str);
 //    Call<ResponseBody> getProgram(@Query("catgId") int catgid,
 //                                  @Query("templateId") int templateId,
 //                                  @Query("pageSize") int pageSize,

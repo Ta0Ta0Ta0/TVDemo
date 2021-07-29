@@ -10,6 +10,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -47,24 +48,37 @@ public class Practice1_1Activity extends AppCompatActivity {
 
         retrofit = new Retrofit.Builder()
                 .baseUrl(url_example)
+                .addConverterFactory(GsonConverterFactory.create())
                 .build();
         httpProgram = retrofit.create(IHttpProgram.class);
-        Call<ResponseBody> call = httpProgram.getProgram("getPsList.shtml?catgId=2220637&templateId=44800196&pageSize=240&pageNo=1&abilityString={\"abilities\":[\"NxM\",\"timeShift\",\"4K-1|cp-TENCENT\"],\"businessGroupIds\":[],\"deviceGroupIds\":[\"2072\"],\"districtCode\":\"320200\",\"labelIds\":[\"3251\",\"3252\",\"3253\",\"3254\",\"3259\",\"328\"],\"userGroupIds\":[\"228\"],\"userLabelIds\":[\"3251\",\"3252\",\"3253\",\"3254\",\"3259\",\"328\"]}&serviceChannelId=");
-        call.enqueue(new Callback<ResponseBody>() {
+        Call<ItemInfo> call = httpProgram.getProgram("getPsList.shtml?catgId=2220637&templateId=44800196&pageSize=240&pageNo=1&abilityString={\"abilities\":[\"NxM\",\"timeShift\",\"4K-1|cp-TENCENT\"],\"businessGroupIds\":[],\"deviceGroupIds\":[\"2072\"],\"districtCode\":\"320200\",\"labelIds\":[\"3251\",\"3252\",\"3253\",\"3254\",\"3259\",\"328\"],\"userGroupIds\":[\"228\"],\"userLabelIds\":[\"3251\",\"3252\",\"3253\",\"3254\",\"3259\",\"328\"]}&serviceChannelId=");
+        call.enqueue(new Callback<ItemInfo>() {
             @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    Log.d("测试：", response.body().string());
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+            public void onResponse(Call<ItemInfo> call, Response<ItemInfo> response) {
+                Log.d("retrofit测试：",response.body().getCount());
             }
 
             @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Log.d("失败：", t.getMessage());
+            public void onFailure(Call<ItemInfo> call, Throwable t) {
+                Log.e("retrofit错误",t.getMessage(),t);
             }
         });
+//        Call<ResponseBody> call = httpProgram.getProgram("getPsList.shtml?catgId=2220637&templateId=44800196&pageSize=240&pageNo=1&abilityString={\"abilities\":[\"NxM\",\"timeShift\",\"4K-1|cp-TENCENT\"],\"businessGroupIds\":[],\"deviceGroupIds\":[\"2072\"],\"districtCode\":\"320200\",\"labelIds\":[\"3251\",\"3252\",\"3253\",\"3254\",\"3259\",\"328\"],\"userGroupIds\":[\"228\"],\"userLabelIds\":[\"3251\",\"3252\",\"3253\",\"3254\",\"3259\",\"328\"]}&serviceChannelId=");
+//        call.enqueue(new Callback<ResponseBody>() {
+//            @Override
+//            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+//                try {
+//                    Log.d("测试：", response.body().string());
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<ResponseBody> call, Throwable t) {
+//                Log.d("失败：", t.getMessage());
+//            }
+//        });
 
     }
 
