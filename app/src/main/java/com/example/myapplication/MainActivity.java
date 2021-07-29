@@ -13,9 +13,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Button button1_1 = (Button)findViewById(R.id.step1_1);
-        Button button1_2 = (Button)findViewById(R.id.step1_2);
-        Button button1_3 = (Button)findViewById(R.id.step1_3finish);
+        Button button1_1 = (Button) findViewById(R.id.step1_1);
+        Button button1_2 = (Button) findViewById(R.id.step1_2);
+        Button button1_3 = (Button) findViewById(R.id.step1_3finish);
+        Button button2_1 = (Button) findViewById(R.id.step2_1);
         button1_1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -35,6 +36,12 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this,Practice1_3Activity.class);
                 startActivity(intent);
+            }
+        });
+        button2_1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,Practice1_1Activity.class);
             }
         });
     }

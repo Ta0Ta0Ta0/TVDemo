@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.myapplication.R;
 import com.example.myapplication.practice.ItemInfo;
@@ -43,7 +44,26 @@ public class ItemInfoAdapter extends RecyclerView.Adapter<ItemInfoAdapter.ViewHo
     public ViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_show,parent,false);
-        ViewHolder holder = new ViewHolder(view);
+        final ViewHolder holder = new ViewHolder(view);
+        holder.programView.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                int position = holder.getAdapterPosition();
+                ProgramSeriesDTO program = programSeriesList.get(position);
+                Toast.makeText(v.getContext(),"选择了"+program.getName(),Toast.LENGTH_LONG)
+                        .show();
+            }
+        });
+        holder.itemImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int position = holder.getAdapterPosition();
+                ProgramSeriesDTO program = programSeriesList.get(position);
+                Toast.makeText(v.getContext(),"图片点击"+program.getName(),Toast.LENGTH_LONG)
+                        .show();
+            }
+        });
         return  holder;
     }
 
@@ -71,11 +91,13 @@ public class ItemInfoAdapter extends RecyclerView.Adapter<ItemInfoAdapter.ViewHo
     static class ViewHolder extends RecyclerView.ViewHolder{
         SimpleDraweeView itemImage;
         TextView itemName;
+        View programView;
 
         public ViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
             itemImage  = (SimpleDraweeView) itemView.findViewById(R.id.item_image);
             itemName  = (TextView) itemView.findViewById(R.id.item_name);
+            programView = itemView;
         }
     }
 

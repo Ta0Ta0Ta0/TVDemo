@@ -11,7 +11,7 @@
         android:id="@+id/step1_1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="请求网络数据"
+        android:text="Retrofit+gson+fresco实现"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
          />
@@ -21,16 +21,24 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="图片加载"
-        app:layout_constraintRight_toRightOf="@id/step1_1"
+        app:layout_constraintLeft_toRightOf="@id/step1_1"
         app:layout_constraintStart_toEndOf="@+id/step1_1"
         app:layout_constraintTop_toTopOf="parent" />
     <Button
         android:id="@+id/step1_3finish"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="recycle布局实现"
-        app:layout_constraintRight_toRightOf="@id/step1_2"
+        android:text="OKHttp+gson+fresco实现"
+        app:layout_constraintLeft_toRightOf="@id/step1_2"
         app:layout_constraintStart_toEndOf="@+id/step1_2"
+        app:layout_constraintTop_toTopOf="parent" />
+    <Button
+        android:id="@+id/step2_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="焦点DEMO"
+        app:layout_constraintLeft_toRightOf="@id/step1_3finish"
+        app:layout_constraintStart_toEndOf="@+id/step1_3finish"
         app:layout_constraintTop_toTopOf="parent" />
 
 

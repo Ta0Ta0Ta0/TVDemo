@@ -1,6 +1,8 @@
 package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -20,7 +22,9 @@ import android.widget.CalendarView;
 import android.widget.TextView;
 
 import com.example.myapplication.practice.ItemInfo;
+import com.example.myapplication.practice.ItemInfoAdapter;
 import com.example.myapplication.service.IHttpProgram;
+import com.facebook.drawee.backends.pipeline.Fresco;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -31,11 +35,18 @@ public class Practice1_1Activity extends AppCompatActivity {
     TextView responseText;
     private Retrofit retrofit;
     private IHttpProgram httpProgram;
+    private RecyclerView recyclerView;
+    private ItemInfoAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_practice11);
+        setContentView(R.layout.activity_practice13);
+        Fresco.initialize(this);
+        recyclerView = (RecyclerView)findViewById(R.id.to_show);
+        StaggeredGridLayoutManager layoutManager =
+                new StaggeredGridLayoutManager(5,StaggeredGridLayoutManager.VERTICAL);
+        recyclerView.setLayoutManager(layoutManager);
 //        responseText = (TextView)findViewById(R.id.response_txt);
 //        sendRequestWithOkhttp();
         sendRequestWithRetrofit();
@@ -56,6 +67,8 @@ public class Practice1_1Activity extends AppCompatActivity {
             @Override
             public void onResponse(Call<ItemInfo> call, Response<ItemInfo> response) {
                 Log.d("retrofit测试：",response.body().getCount());
+                adapter = new ItemInfoAdapter(response.body());
+                recyclerView.setAdapter(adapter);
             }
 
             @Override
