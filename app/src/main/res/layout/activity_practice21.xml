@@ -4,6 +4,70 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Practice2_1Activity">
+    tools:context=".Practice2_1Activity"
+    android:orientation="horizontal"
+    android:padding="10dp"
+    >
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ImageView
+                android:id="@+id/pic_1"
+                android:layout_width="326dp"
+                android:layout_height="482dp"
+                app:layout_constraintEnd_toStartOf="@id/pic_2"
+                app:layout_constraintStart_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:padding="10dp"
+                android:src="@drawable/example_1"
+                android:background="@drawable/background_selector"
+
+                android:focusable="true"
+                android:nextFocusRight="@id/pic_2"
+
+
+                />
+            <ImageView
+                android:id="@+id/pic_2"
+                android:layout_width="326dp"
+                android:layout_height="482dp"
+                app:layout_constraintStart_toEndOf="@id/pic_1"
+                app:layout_constraintEnd_toStartOf="@id/pic_3"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:padding="10dp"
+                android:src="@drawable/example_2"
+                android:background="@drawable/background_selector"
+
+                android:focusable="true"
+                android:nextFocusLeft="@id/pic_1"
+                android:nextFocusRight="@id/pic_3"
+                />
+            <ImageView
+                android:id="@+id/pic_3"
+                android:layout_width="326dp"
+                android:layout_height="482dp"
+                app:layout_constraintStart_toEndOf="@+id/pic_2"
+                app:layout_constraintEnd_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:padding="10dp"
+                android:src="@drawable/example_3"
+                android:background="@drawable/background_selector"
+
+                android:focusable="true"
+                android:nextFocusLeft="@id/pic_2"
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </HorizontalScrollView>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
