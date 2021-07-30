@@ -7,11 +7,21 @@
     tools:context=".Practice2_1Activity"
     android:orientation="horizontal"
     android:padding="10dp"
+    android:focusable="false"
+    android:focusableInTouchMode="false"
+    android:descendantFocusability="afterDescendants"
     >
     <HorizontalScrollView
+        android:descendantFocusability="afterDescendants"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/conlayout"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:descendantFocusability="afterDescendants"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <ImageView
@@ -27,6 +37,7 @@
                 android:background="@drawable/background_selector"
 
                 android:focusable="true"
+                android:focusableInTouchMode="true"
                 android:nextFocusRight="@id/pic_2"
 
 
@@ -42,7 +53,7 @@
                 android:padding="10dp"
                 android:src="@drawable/example_2"
                 android:background="@drawable/background_selector"
-
+                android:focusableInTouchMode="true"
                 android:focusable="true"
                 android:nextFocusLeft="@id/pic_1"
                 android:nextFocusRight="@id/pic_3"
@@ -58,7 +69,7 @@
                 android:padding="10dp"
                 android:src="@drawable/example_3"
                 android:background="@drawable/background_selector"
-
+                android:focusableInTouchMode="true"
                 android:focusable="true"
                 android:nextFocusLeft="@id/pic_2"
                 />

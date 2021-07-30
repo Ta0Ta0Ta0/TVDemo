@@ -4,13 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:focusable="false"
+    android:background="#000000"
     tools:context=".Practice1_3Activity">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/to_show"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-
-
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:padding="15dp"
         />
 </LinearLayout>
