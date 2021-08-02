@@ -3,6 +3,7 @@ package com.example.myapplication.service;
 
 import com.example.myapplication.practice.ItemInfo;
 
+import io.reactivex.rxjava3.core.Observable;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 
@@ -15,7 +16,7 @@ import retrofit2.http.Url;
 public interface IHttpProgram {
 
     @GET
-    Call<ItemInfo> getProgram(@Url String str);
+    Observable<ItemInfo> getProgram(@Url String str);
 //    Call<ResponseBody> getProgram(@Query("catgId") int catgid,
 //                                  @Query("templateId") int templateId,
 //                                  @Query("pageSize") int pageSize,
