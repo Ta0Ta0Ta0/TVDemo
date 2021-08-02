@@ -53,6 +53,9 @@ public class MainActivity extends AppCompatActivity {
         Button button1_2 = (Button) findViewById(R.id.step1_2);
         Button button1_3 = (Button) findViewById(R.id.step1_3finish);
         Button button2_1 = (Button) findViewById(R.id.step2_1);
+        Button buttonMusic = (Button) findViewById(R.id.music);
+
+
         button1_1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -81,6 +84,14 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        button2_1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,Practice2_1Activity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
 }

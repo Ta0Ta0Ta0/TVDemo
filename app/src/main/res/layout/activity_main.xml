@@ -41,5 +41,13 @@
         app:layout_constraintStart_toEndOf="@+id/step1_3finish"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <Button
+        android:id="@+id/music"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="music_DEMO"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/step1_1" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
