@@ -7,14 +7,11 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.myapplication.R;
-import com.example.myapplication.practice.ItemInfo;
 import com.facebook.drawee.view.SimpleDraweeView;
-import com.google.android.material.transition.Hold;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -23,7 +20,6 @@ import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-import retrofit2.http.Url;
 
 
 public class ItemInfoAdapter extends RecyclerView.Adapter<ItemInfoAdapter.ViewHolder>{
@@ -109,13 +105,15 @@ public class ItemInfoAdapter extends RecyclerView.Adapter<ItemInfoAdapter.ViewHo
         holder.programView.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
+                scale(holder.programView,hasFocus);
+                holder.itemName.setSelected(hasFocus);
                 if(hasFocus){
 
-                    scale(holder.programView,true);
+
                     holder.itemImage.setBackgroundResource(R.drawable.shape_example);
+
                 } else {
                     holder.itemImage.setBackgroundResource(0);
-                    scale(holder.programView,false);
 
 //                    holder.itemImage.setImageURI(pro);
                 }
@@ -126,15 +124,27 @@ public class ItemInfoAdapter extends RecyclerView.Adapter<ItemInfoAdapter.ViewHo
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 Log.d("按键测试：",String.valueOf(position));
-//                Log.d("数值测试：",String.valueOf(programSeriesList.size()-4)+"::"+String.valueOf(position%5)+"<"+String.valueOf(programSeriesList.size()%5));
-                if( (position >= (programSeriesList.size()-5)) && (position%5 < (programSeriesList.size()-1)%5)){
-                    Log.d("按键测试：","1");
-                    if(keyCode == KeyEvent.KEYCODE_DPAD_DOWN && event.getAction() == KeyEvent.ACTION_DOWN){
-                        Toast.makeText(v.getContext(),"向下",Toast.LENGTH_LONG).show();
-                        Log.d("按键测试：","D");
+
+
+                int size = programSeriesList.size();
+                int mod_1 = size % 5 ;
+                int mod_2 = position % 5;
+                if(mod_1 == 0){
+                    if(position >= size - 5 && position < size){
+                        Log.d("按键测试：","1");
+                        if(keyCode == KeyEvent.KEYCODE_DPAD_DOWN && event.getAction() == KeyEvent.ACTION_DOWN){
+                            Toast.makeText(v.getContext(),"向下",Toast.LENGTH_SHORT).show();
+                            Log.d("按键测试：","D");
+                        }
                     }
-
-
+                }else{
+                    if(position >= size - 5 && mod_2 < mod_1 && position < size){
+                        Log.d("按键测试：","1");
+                        if(keyCode == KeyEvent.KEYCODE_DPAD_DOWN && event.getAction() == KeyEvent.ACTION_DOWN){
+                            Toast.makeText(v.getContext(),"向下",Toast.LENGTH_SHORT).show();
+                            Log.d("按键测试：","D");
+                        }
+                    }
                 }
 
 //                if(keyCode == KeyEvent.KEYCODE_DPAD_UP && event.getAction() == KeyEvent.ACTION_DOWN){

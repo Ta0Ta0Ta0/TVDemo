@@ -1,6 +1,12 @@
 package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
+import io.reactivex.rxjava3.annotations.NonNull;
+import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.core.ObservableEmitter;
+import io.reactivex.rxjava3.core.ObservableOnSubscribe;
+import io.reactivex.rxjava3.core.Observer;
+import io.reactivex.rxjava3.disposables.Disposable;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,8 +15,38 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
+    
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        Observable.create(new ObservableOnSubscribe<Object>() {
+            @Override
+            public void subscribe(@NonNull ObservableEmitter<Object> emitter) throws Throwable {
+                //此处为事件产生的地方
+            }
+        }).subscribe(new Observer<Object>() {
+            @Override
+            public void onSubscribe(@NonNull Disposable d) {
+
+            }
+
+            @Override
+            public void onNext(@NonNull Object o) {
+
+            }
+
+            @Override
+            public void onError(@NonNull Throwable e) {
+
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        });
+        
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Button button1_1 = (Button) findViewById(R.id.step1_1);
