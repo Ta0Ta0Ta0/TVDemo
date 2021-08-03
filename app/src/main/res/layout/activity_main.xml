@@ -48,6 +48,12 @@
         android:text="music_DEMO"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/step1_1" />
-
+    <Button
+        android:id="@+id/mediaPlayer_Demo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="mediaPlayer_DEMO"
+        app:layout_constraintStart_toEndOf="@id/music"
+        app:layout_constraintTop_toBottomOf="@id/step1_1" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

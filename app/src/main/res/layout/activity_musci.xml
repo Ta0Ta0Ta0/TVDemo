@@ -4,11 +4,52 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MusicActivity">
+    tools:context=".MusicActivity"
+
+    >
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/music_menu"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:background="#D89595"
+        android:focusableInTouchMode="false"
+        android:focusable="false"
+
+         />
+
+    <Button
+        android:id="@+id/next"
+        android:text="下一首"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:focusableInTouchMode="true"
+        android:focusable="true"
+
         />
+    <Button
+        android:id="@+id/previous"
+        android:text="上一首"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/next"
+        android:focusableInTouchMode="true"
+        android:focusable="true"
+        />
+    <Button
+        android:id="@+id/start_pause"
+        android:text="暂停/播放"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/previous"
+        android:focusableInTouchMode="true"
+        android:focusable="true"
+        />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
