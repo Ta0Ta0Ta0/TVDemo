@@ -40,7 +40,6 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.ViewHolder> 
                 .inflate(R.layout.music_item,parent,false);
         ViewHolder holder = new ViewHolder(view);
 
-
         return holder;
     }
 
@@ -50,7 +49,7 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.ViewHolder> 
         holder.music_image.setImageURI(musicList.get(position).getAnime_info().getLogo());
         holder.music_name.setText(musicList.get(position).getTitle());
         holder.music_author.setText(musicList.get(position).getAuthor());
-        holder.musicView.setTag(R.id.tag_first,musicList.get(position).getId());
+        holder.itemView.setTag(R.id.tag_first,musicList.get(position).getId());
     }
 
     @Override

@@ -26,6 +26,8 @@ import com.example.myapplication.media.MusicAdapter;
 import com.example.myapplication.media.Song;
 import com.facebook.drawee.backends.pipeline.Fresco;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.io.IOException;
 
 import static java.lang.String.valueOf;
@@ -43,7 +45,7 @@ public class MusicActivity extends AppCompatActivity {
     String str;
     IMusic iMusic;//retrofit中定义的路由接口
     int sum_song;//获得歌曲总数
-    View child;//用于标记选中的歌曲item的view
+    RecyclerView.ViewHolder viewHolder;
     String id;//用于记录歌曲id
     int width;
     int height;
@@ -107,15 +109,12 @@ public class MusicActivity extends AppCompatActivity {
                         sum_song = music.getRes().size();
                         adapter = new MusicAdapter(music);
                         recyclerView.setAdapter(adapter);
-                        recyclerView.post(new Runnable() {
-                            @Override
-                            public void run() {
-                                child = recyclerView.getChildAt(count);
-                                child.setSelected(true);
+                        recyclerView.post(() -> {
+                            viewHolder = recyclerView.findViewHolderForAdapterPosition(0);
+                            viewHolder.itemView.setSelected(true);
 //                                width = child.getWidth();
 //                                height = child.getHeight();
 //                                Log.d("宽高",valueOf(height));
-                            }
                         });
 
                     }
@@ -208,9 +207,9 @@ public class MusicActivity extends AppCompatActivity {
                         mediaPlayer.start();
                     }
                 }else{
-                    child = recyclerView.getChildAt(count);
-                    child.setSelected(true);
-                    id = (String) child.getTag(R.id.tag_first);
+                    viewHolder = recyclerView.findViewHolderForAdapterPosition(count);
+                    viewHolder.itemView.setSelected(true);
+                    id = (String) viewHolder.itemView.getTag(R.id.tag_first);
                     old_count = count;
                     Log.d("按钮",id);
                     httpServiceMusic(id);
@@ -236,11 +235,30 @@ public class MusicActivity extends AppCompatActivity {
      */
     void next(){
         if(count < sum_song-1){
-            child.setSelected(false);
+            if (viewHolder != null) {
+                viewHolder.itemView.setSelected(false);
+            }
             count++;
-            child = recyclerView.getChildAt(count);
-            child.setSelected(true);
+            viewHolder = recyclerView.findViewHolderForAdapterPosition(count);
+            if (viewHolder != null) {
+                viewHolder.itemView.setSelected(true);
 //            recyclerView.scrollBy(2*width,2*height);
+            }else{
+                recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+                    @Override
+                    public void onScrolled(@androidx.annotation.NonNull @NotNull RecyclerView recyclerView, int dx, int dy) {
+                        super.onScrolled(recyclerView, dx, dy);
+                        viewHolder = recyclerView.findViewHolderForAdapterPosition(count);
+                        if (viewHolder != null) {
+                            viewHolder.itemView.setSelected(true);
+
+                        }
+                        recyclerView.removeOnScrollListener(this);
+                    }
+                });
+            }
+            recyclerView.scrollToPosition(count);
+
         }
 
     }
@@ -249,11 +267,30 @@ public class MusicActivity extends AppCompatActivity {
      * 上一首歌
      */
     void previous(){
+
         if(count > 0){
-            child.setSelected(false);
+            if (viewHolder != null) {
+                viewHolder.itemView.setSelected(false);
+            }
             count--;
-            child = recyclerView.getChildAt(count);
-            child.setSelected(true);
+            viewHolder = recyclerView.findViewHolderForAdapterPosition(count);
+            if (viewHolder != null) {
+                viewHolder.itemView.setSelected(true);
+//            recyclerView.scrollBy(2*width,2*height);
+            }else{
+                recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+                    @Override
+                    public void onScrolled(@androidx.annotation.NonNull @NotNull RecyclerView recyclerView, int dx, int dy) {
+                        super.onScrolled(recyclerView, dx, dy);
+                        viewHolder = recyclerView.findViewHolderForAdapterPosition(count);
+                        if (viewHolder != null) {
+                            viewHolder.itemView.setSelected(true);
+                        }
+                        recyclerView.removeOnScrollListener(this);
+                    }
+                });
+            }
+            recyclerView.scrollToPosition(count);
 
         }
 
