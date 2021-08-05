@@ -32,10 +32,11 @@ public class MediaPlayer_Demo extends AppCompatActivity {
     private SurfaceHolder holder;
 
     private SeekBar bar;
-    Timer timer;
-    TimerTask task;
+    Timer timer,timer1,timer2;
+    TimerTask task,task1,task2;
     boolean start = true;
 
+    private boolean isLongPress = false;
 
 
     @Override
@@ -48,6 +49,7 @@ public class MediaPlayer_Demo extends AppCompatActivity {
         video = (SurfaceView)findViewById(R.id.video);
         holder = video.getHolder();
         holder.addCallback(call_holder);
+
 
 
         bar.setOnSeekBarChangeListener(bar_listen);
@@ -65,6 +67,7 @@ public class MediaPlayer_Demo extends AppCompatActivity {
         };
 
         timer.schedule(task,500,500);
+
 
     }
 
@@ -103,6 +106,7 @@ public class MediaPlayer_Demo extends AppCompatActivity {
             if(mediaPlayer != null){
                 mediaPlayer.stop();
                 mediaPlayer.release();
+                timer.cancel();
             }
         }
     };
@@ -119,7 +123,7 @@ public class MediaPlayer_Demo extends AppCompatActivity {
          */
         @Override
         public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-
+                Log.d("测试","进度条变化了");
         }
 
         /**
@@ -128,7 +132,7 @@ public class MediaPlayer_Demo extends AppCompatActivity {
          */
         @Override
         public void onStartTrackingTouch(SeekBar seekBar) {
-
+            Log.d("测试onStartTrackingTouch","进度条开始拖动了");
         }
 
         /**
@@ -137,39 +141,98 @@ public class MediaPlayer_Demo extends AppCompatActivity {
          */
         @Override
         public void onStopTrackingTouch(SeekBar seekBar) {
-
+            Log.d("测试onStopTrackingTouch","进度条停止了");
         }
     };
 
-    /**
-     * 按键触发的监视器
-     * @param keyCode
-     * @param event
-     * @return
-     */
+
+
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        Log.d("具体按键",valueOf(keyCode == KeyEvent.KEYCODE_DPAD_CENTER)+" "+event.getAction());
-        if ( keyCode == KeyEvent.KEYCODE_DPAD_CENTER  && event.getAction() == KeyEvent.ACTION_DOWN ){
-            if(start){
-                Log.d("Enter按钮","暂停");
-                mediaPlayer.pause();
-                start = false;
-            }else{
-                Log.d("Enter按钮","继续");
-                mediaPlayer.start();
-                start = true;
+        switch (keyCode){
+            case KeyEvent.KEYCODE_DPAD_LEFT:
+            case KeyEvent.KEYCODE_DPAD_RIGHT:
+                if(event.getRepeatCount() == 0){
+                    event.startTracking();//跟踪按钮
+                    isLongPress = false;
+                }else{
 
-            }
-        }else if (keyCode == KeyEvent.KEYCODE_DPAD_LEFT && event.getAction() == KeyEvent.ACTION_DOWN){
-            Log.d("left按钮","1");
-            mediaPlayer.seekTo(mediaPlayer.getCurrentPosition()-1500);
+                    isLongPress = true;
+                }
+                return true;
+        }
 
+        return super.onKeyDown(keyCode, event);
+    }
+
+    @Override
+    public boolean onKeyLongPress(int keyCode, KeyEvent event) {
+        Log.d("测试onKeyLongPress","1");
+        if (keyCode == KeyEvent.KEYCODE_DPAD_LEFT && event.getAction() == KeyEvent.ACTION_DOWN){
+            Log.d("left长按","1");
+
+
+            timer1 = new Timer();
+            task1 = new TimerTask() {
+                @Override
+                public void run() {
+                    mediaPlayer.seekTo(mediaPlayer.getCurrentPosition()-mediaPlayer.getDuration()/30);
+                }
+            };
+            timer1.schedule(task1,0,500);
 
         }else if(keyCode == KeyEvent.KEYCODE_DPAD_RIGHT && event.getAction() == KeyEvent.ACTION_DOWN){
-            Log.d("right按钮","1");
-            mediaPlayer.seekTo(mediaPlayer.getCurrentPosition()+1500);
+            Log.d("right长按","1");
+
+            timer2 = new Timer();
+            task2 = new TimerTask() {
+                @Override
+                public void run() {
+                    mediaPlayer.seekTo(mediaPlayer.getCurrentPosition()+mediaPlayer.getDuration()/30);
+                }
+            };
+            timer2.schedule(task2,0,500);
+
+
         }
-        return super.onKeyDown(keyCode, event);
+        return super.onKeyLongPress(keyCode, event);
+    }
+
+    @Override
+    public boolean onKeyUp(int keyCode, KeyEvent event) {
+        Log.d("具体按键",valueOf(keyCode == KeyEvent.KEYCODE_DPAD_CENTER)+" "+event.getAction());
+        if (isLongPress){
+            if(timer1 != null){
+                timer1.cancel();
+                timer1 = null;
+            }else if (timer2 != null){
+                timer2.cancel();
+                timer2 = null;
+            }
+            isLongPress = false;
+            return true;
+        }else{
+            if (keyCode == KeyEvent.KEYCODE_DPAD_CENTER && event.getAction() == KeyEvent.ACTION_UP) {
+                if (start) {
+                    Log.d("Enter按钮", "暂停");
+                    mediaPlayer.pause();
+                    start = false;
+                } else {
+                    Log.d("Enter按钮", "继续");
+                    mediaPlayer.start();
+                    start = true;
+
+                }
+            } else if (keyCode == KeyEvent.KEYCODE_DPAD_LEFT && event.getAction() == KeyEvent.ACTION_UP) {
+                Log.d("left按钮", "1");
+                mediaPlayer.seekTo(mediaPlayer.getCurrentPosition() - 3000);
+
+
+            } else if (keyCode == KeyEvent.KEYCODE_DPAD_RIGHT && event.getAction() == KeyEvent.ACTION_UP) {
+                Log.d("right按钮", "1");
+                mediaPlayer.seekTo(mediaPlayer.getCurrentPosition() + 3000);
+            }
+        }
+        return super.onKeyUp(keyCode, event);
     }
 }
